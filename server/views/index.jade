@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    block content
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+    
+    h1= title
+    img(id='fruitImg')
+    
+    script.
+      function setFruit() {
+        $.ajax({url: "/fruit", success: function(result){
+            $("#fruitImg").attr('src', '/images/' + result.fruit + '.jpg');
+          }});
+      }
+      $(document).ready(function(){
+        setInterval(setFruit, 3000) // poll every 3 seconds
+        setFruit()
+      });
